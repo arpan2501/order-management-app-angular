@@ -1,0 +1,50 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
+    </div>
+    <div class="col">
+      <a class="btn btn-primary" (click)="openDialog()">Add Category</a>
+      <mat-form-field>
+        <mat-select placeholder="Category List">
+          <mat-option *ngFor="let category of categoryList">
+              {{ category.categoryName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="productName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <mat-header-cell *matHeaderCellDef mat-sort-header disabled> Symbol </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <a [routerLink]="['/admin/products/',element.id]">Edit</a> </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+  <mat-paginator *ngIf="productList && productList.length>0" [length]="allProductLength"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions" (page)="pageclcickEvent($event)">
+  </mat-paginator>
+
+</div>

@@ -1,0 +1,35 @@
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" routerLink="/">A</a>
+  <!--   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>-->
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+       <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" routerLink="/products">Products<span class="sr-only">(current)</span></a>
+      </li>
+      <li  class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" routerLink="/shoppingcart">Shopping Cart</a>
+      </li>
+    <li *ngIf="userDetail.isLoggedIn" ngbDropdown class="nav-item" [routerLinkActive]="['active']">
+          <a ngbDropdownToggle class="nav-link" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">
+            {{userDetail.userName}}
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="/my/orders">My Orders</a>
+            <a *ngIf="userDetail.userRole == 'ROLE_ADMIN'" class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
+            <a *ngIf="userDetail.userRole == 'ROLE_ADMIN'" class="dropdown-item" routerLink="/admin/products">Manage Products</a>
+          </div>
+        </li>
+    </ul>
+
+
+      <button *ngIf="!userDetail.isLoggedIn" class="btn btn-outline-success my-2 my-sm-0" type="button"
+      (click)="gotoLogin()">Login</button>
+       <button *ngIf="userDetail.isLoggedIn" class="btn btn-outline-success my-2 my-sm-0" type="button"
+      (click)="logOut()">Logout</button>
+
+
+  </div>
+</nav>

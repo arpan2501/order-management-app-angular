@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-6">
+    <form class="new-product-form" [formGroup]="productForm" (ngSubmit)="onSubmit(productForm.value)" novalidate>
+
+      <div>
+      <mat-form-field class="field-full-width">
+        <input formControlName="productName" name="productName" id="productName" matInput placeholder="Product Name">
+        <mat-error *ngIf="productForm.controls['productName'].hasError('cannotContainSpace')">
+          Product Name should not contain space
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+      <div>
+        <mat-form-field class="field-full-width">
+        <input formControlName="price" id="price" type="number" matInput placeholder="Price">
+        <span matPrefix>$&nbsp;</span>
+        <mat-error *ngIf="productForm.controls['price'].hasError('minimumPrice')">
+          Minimum Price for a Product should not be less than 1$
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="field-full-width">
+        <mat-select formControlName="categoryName" id="categoryName" placeholder="Category List">
+          <mat-option *ngFor="let category of categoryList" [value]="category.categoryName">
+              {{ category.categoryName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+      <div>
+        <mat-form-field class="field-full-width ">
+          <input formControlName="imageURL" id="imageURL" matInput placeholder="Image URL">
+          <mat-error *ngIf="productForm.controls['imageURL'].hasError('url')">
+          Not a valid url!
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save</button>
+
+    </form>
+  </div>
+  <div class="col-md-6">
+    <mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Preview</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image [src]="productForm.value.imageURL">
+  <mat-card-content>
+    <p>
+    {{productForm.value.productName}}
+    </p>
+    <p>
+      {{productForm.value.price | currency:'USD'}}
+    </p>
+  </mat-card-content>
+</mat-card>
+  </div>
+</div>

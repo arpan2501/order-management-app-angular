@@ -1,0 +1,32 @@
+<div class="container">
+
+      <form class="form-signin" [formGroup]="signUpForm" (ngSubmit)="onSubmit(signUpForm.value)" novalidate>
+        <h2 class="form-signin-heading">Please Sign in</h2>
+        <div class="form-group">
+        <label for="userName">User Name</label>
+        <input type="text" id="userName" class="form-control" 
+        formControlName="userName" placeholder="John Doe" >
+        </div>
+        <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" id="email" class="form-control" 
+        formControlName="email" placeholder="johndoe25@gmail.com" >
+        </div>
+        <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" 
+        formControlName="password" placeholder="Your secret">
+        </div>
+        <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" class="form-control" 
+        formControlName="confirmPassword" placeholder="Confirm your secret">
+        </div>
+      
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+       
+      </form>
+      
+      <p>Form value: {{ signUpForm.value | json }}</p>
+<p>Form status: {{ signUpForm.status | json }}</p>
+    </div>
