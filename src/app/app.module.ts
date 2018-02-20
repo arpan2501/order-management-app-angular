@@ -31,6 +31,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import { CategoryDialogComponent } from './admin/component-dialog/component-dialog.component';
 import { CustomFormsModule } from 'ng2-validation';
+import { ProductFilterComponent } from './home/product-filter/product-filter.component';
 
 
 const appRoute:Routes = [
@@ -85,7 +86,8 @@ const appRoute:Routes = [
     LoginComponent,
     SignUpComponent,
     ProductFormComponent,
-    CategoryDialogComponent
+    CategoryDialogComponent,
+    ProductFilterComponent
   ],entryComponents:[
     CategoryDialogComponent
   ],

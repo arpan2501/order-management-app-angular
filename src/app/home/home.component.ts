@@ -12,20 +12,16 @@ import {PageEvent} from '@angular/material';
 })
 export class HomeComponent implements OnInit {
   category:string;
-  categoryList:Category[];
+
   pageSize:number=2;
   pageIndex:number=0;
-  defaultCategory:string = 'All';
+
   pageSizeOptions = [1,2,3];
 
   productlist:Product[];
   totalProductCount:number;
 
   constructor(private homeService:SignUpService,private route:ActivatedRoute) {
-
-    this.homeService.getCategories().subscribe(res=>
-        this.categoryList = res
-    );
 
     this.route.queryParamMap.subscribe(params => {
 
@@ -60,8 +56,8 @@ export class HomeComponent implements OnInit {
   }
 
   categoricalSelect(){
-    if(!this.category || this.category==this.defaultCategory){
-        this.categoricalProduct(this.defaultCategory);
+    if(!this.category){
+        this.categoricalProduct("All");
     }
     else{
         this.categoricalProduct(this.category);

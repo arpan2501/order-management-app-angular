@@ -6,20 +6,7 @@
   </mat-paginator>
   <div class="row">
     <div class="col-3">
-      <div class="list-group sticky-top">
-        <a class="list-group-item list-group-item-action"
-        [class.active]="category === defaultCategory || !category"
-        routerLink="/"
-        [queryParams]="{category:defaultCategory}">
-          All categories
-        </a>
-          <a *ngFor="let cat of categoryList" class="list-group-item list-group-item-action"
-          routerLink="/"
-          [queryParams]="{category:cat.categoryName}"
-          [class.active]="category === cat.categoryName">
-            {{cat.categoryName}}
-          </a>
-      </div>
+      <product-filter [category]="category"></product-filter>
     </div>
     <div class="col">
       <div class="row">
