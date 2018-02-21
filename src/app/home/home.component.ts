@@ -13,6 +13,7 @@ import {PageEvent} from '@angular/material';
 export class HomeComponent implements OnInit {
   category:string;
 
+  
   pageSize:number=2;
   pageIndex:number=0;
 
@@ -52,6 +53,7 @@ export class HomeComponent implements OnInit {
     productTO => {
     this.productlist = productTO['productList'];
     this.totalProductCount = productTO['allProductLength'];
+    console.log('Count for each category ',this.totalProductCount);
     });
   }
 

@@ -46,18 +46,18 @@
   </div>
   <div class="col-md-6">
     <mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title>Preview</mat-card-title>
-  </mat-card-header>
-  <img mat-card-image [src]="productForm.value.imageURL">
-  <mat-card-content>
-    <p>
-    {{productForm.value.productName}}
-    </p>
-    <p>
-      {{productForm.value.price | currency:'USD'}}
-    </p>
-  </mat-card-content>
-</mat-card>
+      <mat-card-header>
+        <mat-card-title>Preview</mat-card-title>
+        </mat-card-header>
+          <img mat-card-image [src]="productForm.value.imageURL">
+        <mat-card-content>
+            <p>
+            {{productForm.value.productName}}
+            </p>
+            <p>
+              {{productForm.value.price | currency:'USD'}}
+            </p>
+       </mat-card-content>
+  </mat-card>
   </div>
 </div>

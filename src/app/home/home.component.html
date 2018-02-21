@@ -1,8 +1,9 @@
 
 <div class="container">
   <mat-paginator *ngIf="productlist && productlist.length>0" [length]="totalProductCount"
-              [pageSize]="pageSize"
+              [pageSize]="pageSize" [pageIndex]="pageIndex"
               [pageSizeOptions]="pageSizeOptions" (page)="pageclcickEvent($event)">
+
   </mat-paginator>
   <div class="row">
     <div class="col-3">
@@ -14,20 +15,7 @@
         <ng-container *ngFor="let product of productlist;let i=index">
 
         <div class="col">
-          <mat-card class="example-card">
-          <mat-card-header>
-          <mat-card-title>{{product.productName}}</mat-card-title>
-          </mat-card-header>
-          <img mat-card-image [src]="product.imageURL">
-          <mat-card-content>
-          <p>
-          {{product.price | currency:'USD'}}
-          </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button class="btn btn-primary btn-block">Add to Cart</button>
-          </mat-card-actions>
-          </mat-card>
+          <product-card [product]="product"></product-card>
         </div>
 
         <div *ngIf = "(i + 1) % 2 === 0" class="w-100"></div>
@@ -38,7 +26,7 @@
     </div>
   </div>
   <mat-paginator *ngIf="productlist && productlist.length>0" [length]="totalProductCount"
-              [pageSize]="pageSize"
+              [pageSize]="pageSize" [pageIndex]="pageIndex"
               [pageSizeOptions]="pageSizeOptions" (page)="pageclcickEvent($event)">
   </mat-paginator>
   </div>
