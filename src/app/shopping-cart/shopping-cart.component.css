@@ -1,0 +1,19 @@
+.thumbnail{
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+}
+
+.table {
+    width: 100%;
+  }
+
+.table-head{
+    width:40%;
+}
+
+.button-cursor button{
+    cursor: pointer;
+}
+
+

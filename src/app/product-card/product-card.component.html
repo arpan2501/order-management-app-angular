@@ -8,7 +8,16 @@
 {{product.price | currency:'USD'}}
 </p>
 </mat-card-content>
-<mat-card-actions>
-  <button class="btn btn-primary btn-block">Add to Cart</button>
+
+<mat-card-actions class="card-footer-button">
+  <button *ngIf="quantity===0; else updateQuantity"
+  (click)="addToCart()"class="btn btn-primary btn-block">
+  Add to Cart
+ </button>
+ <ng-template #updateQuantity>
+   <product-quantity [productId]="product.id" [quantity]="quantity"></product-quantity>
+ </ng-template>
+
 </mat-card-actions>
+
 </mat-card>

@@ -1,7 +1,7 @@
 import { SignUpService } from "../sign-up/sign-up.service";
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
 	invalidLogin:boolean;
   constructor(private signUpService:SignUpService, private fb:FormBuilder,
-  private router: Router) {
+  private router: Router, private route:ActivatedRoute) {
   this.createForm();
    }
 
@@ -36,8 +36,14 @@ export class LoginComponent implements OnInit {
   console.log(credentials);
    this.signUpService.getToken(credentials).subscribe(
     result => {
-   	localStorage.setItem('token',result.headers.get('authorization'));
-   	this.router.navigate(['/']);
+     localStorage.setItem('token',result.headers.get('authorization'));
+    let params = this.route.snapshot.queryParams;
+    if (params['redirectUrl']) {
+      this.router.navigateByUrl(params['redirectUrl']).
+      catch(()=>this.router.navigate(['/']));
+    }else{
+     this.router.navigate(['/']);
+    }
    	this.signUpService.isLoggedIn();
    }, (err: HttpErrorResponse) => {
    	  this.invalidLogin = true;

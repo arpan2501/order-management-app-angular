@@ -3,7 +3,7 @@ import { Category } from './category.detail';
 export interface Product {
   id: number;
   productName: string;
-  price: number;
+  price: Number;
   imageURL: string;
   category:Category;
 }

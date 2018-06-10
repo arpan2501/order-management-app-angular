@@ -1,3 +1,40 @@
-<p>
-  shopping-cart works!
-</p>
+<h1>Shopping Cart</h1>
+    <p>
+        You have {{cartService.cartItemSubject | async}} items in your Shoping Cart.
+    </p>
+    
+  <div class="row col-10 button-cursor" *ngIf="cartItems?.length>0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th class="table-head">Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems;let i=index">
+          
+           
+         
+          <td>
+            <img [src]="item.product.imageURL" class="thumbnail"/>
+            {{item.product.productName}}
+          </td>
+          <td>
+              <button class="btn  btn-secondary" (click)="addToCart(item,i)">+</button>&nbsp;
+              {{item.quantity}} in cart &nbsp;
+              <button class="btn  btn-secondary" (click)="removeFromCart(item,i)">-</button>
+          </td>
+          <td>
+            {{item.quantity*item.product.price}}
+          </td>
+        </tr>
+      </tbody>
+      <tfoot><tr><th></th><th></th><th>{{totalPrice}}</th></tr></tfoot>
+    </table>
+    <button class="btn btn-danger btn-sm" (click)="clearCart()">Clear Cart</button>
+    <a routerLink="/check-out" class="btn btn-primary">Check Out</a>
+  </div>
+
+

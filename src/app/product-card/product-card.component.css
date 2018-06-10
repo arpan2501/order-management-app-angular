@@ -2,3 +2,7 @@
   width: 15rem;
   margin-bottom: 30px;
 }
+
+.card-footer-button button{
+  cursor: pointer;
+}

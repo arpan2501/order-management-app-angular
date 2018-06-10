@@ -10,7 +10,11 @@
         <a class="nav-link" routerLink="/products">Products<span class="sr-only">(current)</span></a>
       </li>
       <li  class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" routerLink="/shoppingcart">Shopping Cart</a>
+        <a class="nav-link" routerLink="/shoppingcart">
+          Shopping Cart
+          <span class="badge badge-light">{{cartService.cartItemSubject | async}}</span>
+          
+        </a>
       </li>
     <li *ngIf="userDetail.isLoggedIn" ngbDropdown class="nav-item" [routerLinkActive]="['active']">
           <a ngbDropdownToggle class="nav-link" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">

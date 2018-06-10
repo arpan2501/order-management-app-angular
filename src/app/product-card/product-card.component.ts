@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter} from '@angular/core';
 import { Product } from '../product.info';
+import { ShopingCartService } from '../services/shoping-cart.service';
+import { Item} from './cart-item';
+
 
 @Component({
   selector: 'product-card',
@@ -9,10 +12,17 @@ import { Product } from '../product.info';
 export class ProductCardComponent implements OnInit {
 
   @Input('product')product:Product;
+  quantity:Number=0;
 
-  constructor() { }
+  constructor(private cartService:ShopingCartService) { }
 
   ngOnInit() {
+    if(this.cartService.getCartID()){
+    this.cartService.getProductQuantity(this.product.id).subscribe(res=> this.quantity=res);
+    }
   }
 
+  addToCart(){
+    this.cartService.addToCart(this.product.id).subscribe(res=> this.quantity=res);
+  } 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { SignUpService } from '../sign-up/sign-up.service';
 import { UserInfo } from '../user.info';
 
@@ -12,13 +12,13 @@ export class LoginGuard implements CanActivate {
   private router:Router) { }
 
 
-canActivate(){
+canActivate(next: ActivatedRouteSnapshot,state: RouterStateSnapshot){
   this.signUpService.userDetail.subscribe( user => this.user=user);
   if(this.user.isLoggedIn){
     return true;
   }
   else{
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'],{queryParams:{'redirectUrl':state.url}});
     return false;
   }
 }

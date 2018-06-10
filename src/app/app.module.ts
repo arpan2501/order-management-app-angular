@@ -17,6 +17,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpService } from "./sign-up/sign-up.service";
+import { ShopingCartService } from './services/shoping-cart.service';
 import { AuthGuard } from './guard/auth-guard.service';
 import { LoginGuard } from './guard/login-guard.service';
 import { AuthInterceptor } from "./sign-up/auth.interceptor";
@@ -33,6 +34,7 @@ import { CategoryDialogComponent } from './admin/component-dialog/component-dial
 import { CustomFormsModule } from 'ng2-validation';
 import { ProductFilterComponent } from './home/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 
 
 const appRoute:Routes = [
@@ -45,7 +47,11 @@ const appRoute:Routes = [
     canActivate:[LoginGuard]
   },
   {path:'shoppingcart',component:ShoppingCartComponent},
-  {path:'check-out',component:CheckOutComponent},
+  { 
+    path:'check-out',
+    component:CheckOutComponent,
+    canActivate:[LoginGuard]
+  },
   {path:'order-success',component:OrderSuccessComponent},
   {path:'login',component:LoginComponent},
   {path:'sign-up',component:SignUpComponent},
@@ -89,7 +95,8 @@ const appRoute:Routes = [
     ProductFormComponent,
     CategoryDialogComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductQuantityComponent
   ],entryComponents:[
     CategoryDialogComponent
   ],
@@ -114,6 +121,7 @@ const appRoute:Routes = [
     )
   ],
   providers: [SignUpService,
+    ShopingCartService,
     AuthGuard,
     LoginGuard,{
     provide:HTTP_INTERCEPTORS,

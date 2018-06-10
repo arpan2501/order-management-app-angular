@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SignUpService } from "../sign-up/sign-up.service";
 import { UserInfo } from '../user.info';
+import { ShopingCartService } from '../services/shoping-cart.service';
 
 @Component({
   selector: 'nav-bar',
@@ -11,10 +12,11 @@ import { UserInfo } from '../user.info';
 export class NavBarComponent implements OnInit {
 
   userDetail:UserInfo;
-
+  totalcartcount:Number;
 
   constructor(private router:Router,
-  private signService:SignUpService)
+  private signService:SignUpService,
+  private cartService:ShopingCartService)
   { }
 
   ngOnInit() {
@@ -40,5 +42,7 @@ logOut() {
   this.router.navigate(['/login']);
 
 }
+
+
 
 }
