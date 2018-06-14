@@ -3,6 +3,7 @@ import { ShopingCartService } from '../services/shoping-cart.service';
 import { Item } from '../product-card/cart-item';
 import { Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -13,8 +14,9 @@ export class ShoppingCartComponent implements OnInit {
 
   cartItems:Item[];
   totalPrice:Number=0;
+  image:any[]=[];
   
-  constructor(private cartService:ShopingCartService) { }
+  constructor(private cartService:ShopingCartService, private sanitizer:DomSanitizer) { }
 
   ngOnInit() {
     this.cartService.getCartItems().subscribe(res=>{
@@ -26,7 +28,14 @@ export class ShoppingCartComponent implements OnInit {
   getTotalPrice(){
     this.cartItems.forEach(item=>{
       this.addToToalPrice(item);
-      })
+      this.sanitizeImage(item);
+      });
+      console.log(this.image);
+  }
+
+  sanitizeImage(item){
+    let productImage = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' +item.product.productImage);
+    this.image.push(productImage);
   }
 
   addToCart(item:Item,index){

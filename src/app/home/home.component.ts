@@ -52,6 +52,7 @@ export class HomeComponent implements OnInit {
     this.homeService.getHomeProducts(cat,this.pageSize,this.pageIndex).subscribe(
     productTO => {
     this.productlist = productTO['productList'];
+    console.log('here ',this.productlist);
     this.totalProductCount = productTO['allProductLength'];
     console.log('Count for each category ',this.totalProductCount);
     });

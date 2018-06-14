@@ -7,6 +7,7 @@ import { Category } from '../category.detail';
 import { Product } from '../product.info';
 import { ProductPageTO } from '../productPage.detail';
 import {Observable} from 'rxjs';
+import { ToastrService } from "ngx-toastr";
 
 @Injectable()
 export class SignUpService {
@@ -14,7 +15,7 @@ export class SignUpService {
   private userInfo = new BehaviorSubject<UserInfo>(this.refreshLoggedIn());
   userDetail = this.userInfo.asObservable();
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private toastr: ToastrService) { }
 
 
   registerNewUser(signUpDetails){
@@ -103,11 +104,21 @@ getProduct(id:number):Observable<Product>{
 }
 
 saveProduct(product){
-  this.http.post('api/saveProduct',product).subscribe();
+  console.log(product);
+  this.http.post('api/saveProduct',product).subscribe(()=>
+  this.toastr.success('Product saved successfully.','Save Product',{
+    timeOut:4000,
+    positionClass: 'toast-bottom-right'
+  })
+);
 }
 
 updateProduct(product,productId){
-  return this.http.post('api/updateProduct'+productId,product);
+  return this.http.post('api/updateProduct/'+productId,product).
+  subscribe(()=>this.toastr.success('Product updated successfully.','Update Product',{
+    timeOut:4000,
+    positionClass: 'toast-bottom-right'
+  }));
 }
 
 getHomeProducts(categoryType,pageSize,pageNumber):Observable<ProductPageTO[]>{

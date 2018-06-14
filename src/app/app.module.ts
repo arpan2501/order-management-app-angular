@@ -8,7 +8,6 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './products/products.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
@@ -34,12 +33,11 @@ import { CategoryDialogComponent } from './admin/component-dialog/component-dial
 import { CustomFormsModule } from 'ng2-validation';
 import { ProductFilterComponent } from './home/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
-import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 const appRoute:Routes = [
 {path:'',component:HomeComponent},
-  {path:'products',component:ProductsComponent},
   {path:'shoppingcart',component:ShoppingCartComponent},
   {
     path:'my/orders',
@@ -84,7 +82,6 @@ const appRoute:Routes = [
     NavBarComponent,
     ShoppingCartComponent,
     HomeComponent,
-    ProductsComponent,
     CheckOutComponent,
     OrderSuccessComponent,
     MyOrdersComponent,
@@ -96,7 +93,6 @@ const appRoute:Routes = [
     CategoryDialogComponent,
     ProductFilterComponent,
     ProductCardComponent,
-    ProductQuantityComponent
   ],entryComponents:[
     CategoryDialogComponent
   ],
@@ -118,7 +114,8 @@ const appRoute:Routes = [
     NgbModule.forRoot(),
     RouterModule.forRoot(
     appRoute
-    )
+    ),
+    ToastrModule.forRoot()
   ],
   providers: [SignUpService,
     ShopingCartService,

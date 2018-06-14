@@ -2,7 +2,9 @@
 <mat-card-header>
 <mat-card-title>{{product.productName}}</mat-card-title>
 </mat-card-header>
-<img mat-card-image [src]="product.imageURL">
+<ng-container *ngIf="product.productImage">
+<img mat-card-image [src]="'data:image/jpg;base64,'+product.productImage">
+</ng-container>
 <mat-card-content>
 <p>
 {{product.price | currency:'USD'}}
@@ -15,7 +17,19 @@
   Add to Cart
  </button>
  <ng-template #updateQuantity>
-   <product-quantity [productId]="product.id" [quantity]="quantity"></product-quantity>
+   
+<div class="row no-gutters">
+    <div class="col-2">
+      <button class="btn btn-secondary btn-block" (click)="removeFromCart()">-</button>
+    </div>
+    <div class="col text-center">
+      {{quantity}} in cart
+    </div>
+    <div class="col-2">
+      <button class="btn btn-block btn-secondary" (click)="addToCart()">+</button>
+    </div>
+ </div>
+ 
  </ng-template>
 
 </mat-card-actions>

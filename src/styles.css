@@ -5,3 +5,6 @@
 body{
 	padding:80px;
 }
+
+
+@import "~ngx-toastr/toastr.css";
