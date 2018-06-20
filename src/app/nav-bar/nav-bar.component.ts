@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SignUpService } from "../sign-up/sign-up.service";
 import { UserInfo } from '../user.info';
 import { ShopingCartService } from '../services/shoping-cart.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'nav-bar',
@@ -12,15 +13,16 @@ import { ShopingCartService } from '../services/shoping-cart.service';
 export class NavBarComponent implements OnInit {
 
   userDetail:UserInfo;
-  totalcartcount:Number;
+  totalcartcount:Observable<Number>;
 
   constructor(private router:Router,
   private signService:SignUpService,
-  private cartService:ShopingCartService)
+  public cartService:ShopingCartService)
   { }
 
   ngOnInit() {
     this.signService.userDetail.subscribe(res => this.userDetail=res);
+   // this.totalcartcount = this.cartService.cartItemSubject.asObservable();
   }
   isIn : boolean = false;   // store state
 

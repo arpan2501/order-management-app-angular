@@ -16,7 +16,7 @@ export class ShoppingCartComponent implements OnInit {
   totalPrice:Number=0;
   image:any[]=[];
   
-  constructor(private cartService:ShopingCartService, private sanitizer:DomSanitizer) { }
+  constructor(public cartService:ShopingCartService, private sanitizer:DomSanitizer) { }
 
   ngOnInit() {
     this.cartService.getCartItems().subscribe(res=>{
